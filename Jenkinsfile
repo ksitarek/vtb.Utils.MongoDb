@@ -55,7 +55,7 @@ pipeline {
         }
 
         stage('Publish') {
-            steps {
+            steps { 
                 sh 'dotnet publish vtb.Utils.MongoDb/vtb.Utils.MongoDb.csproj --no-build --no-restore -o ./out -c Release'
                 archiveArtifacts artifacts: 'out/*', fingerprint: true
 
