@@ -29,6 +29,12 @@ pipeline {
                     '''
             }
         }
+        stage('Restore') {
+            steps {
+                sh 'dotnet nuget add source https://${BAGET_HOST}/v3/index.json --username ${BAGET_USERNAME} --password ${BAGET_PASSWORD} --store-password-in-clear-text --name BaGet'
+                sh 'dotnet restore'
+            }
+        }
         stage('Build') {
             steps {
                 sh 'dotnet build -p:Version=${VERSION} -c Release'
@@ -62,7 +68,6 @@ pipeline {
                 sh 'dotnet pack vtb.Utils.MongoDb/vtb.Utils.MongoDb.csproj --no-build --no-restore -p:PackageVersion=${VERSION} -o . -c Release'
                 archiveArtifacts artifacts: '*.nupkg', fingerprint: true
 
-                sh 'dotnet nuget add source https://${BAGET_HOST}/v3/index.json --username ${BAGET_USERNAME} --password ${BAGET_PASSWORD} --store-password-in-clear-text --name BaGet'
                 sh 'dotnet nuget push "**/*.nupkg" -s BaGet -k ${BAGET_API_KEY}'
             }
         }
