@@ -6,8 +6,8 @@
 
   <ItemGroup>
     <PackageReference Include="Mongo2Go" Version="2.2.12" />
-    <PackageReference Include="MongoDB.Driver" Version="2.10.4" />
-    <PackageReference Include="vtb.Utils" />
+    <PackageReference Include="MongoDB.Driver" Version="2.11.1" />
+    <PackageReference Include="vtb.Utils" Version="1.0.26" />
   </ItemGroup>
 
 </Project>
